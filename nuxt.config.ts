@@ -16,16 +16,17 @@ export default defineNuxtConfig({
   },
 
   pwa: {
+    mode: "development", // Enable for development
+    base: "/",
+    scope: "/",
     registerType: "autoUpdate",
     workbox: {
+      globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
       navigateFallback: "/",
-      globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
-    },
-    client: {
-      installPrompt: true,
+      navigateFallbackDenylist: [/^\/api\//],
     },
     devOptions: {
-      enabled: true,
+      enabled: true, // Enable in dev mode
       suppressWarnings: true,
       navigateFallbackAllowlist: [/^\/$/],
       type: "module",
@@ -41,28 +42,20 @@ export default defineNuxtConfig({
       orientation: "portrait",
       scope: "/",
       start_url: "/",
+      id: "expense-tracker-pwa",
       icons: [
         {
-          src: "/icon-192x192.png", // Fix the filename
+          src: "icon-192x192.png",
           sizes: "192x192",
           type: "image/png",
-          purpose: "maskable any",
         },
         {
-          src: "/icon-512x512.png", // Fix the filename
+          src: "icon-512x512.png",
           sizes: "512x512",
           type: "image/png",
-          purpose: "maskable any",
         },
       ],
       categories: ["finance", "productivity", "utilities"],
-    },
-    meta: {
-      name: "Expense Tracker",
-      author: "Your Name",
-      description: "Track your expenses with detailed analytics and insights",
-      theme_color: "#3B82F6",
-      lang: "en",
     },
   },
 
