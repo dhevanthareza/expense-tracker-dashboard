@@ -16,9 +16,6 @@ export default defineNuxtConfig({
   },
 
   pwa: {
-    mode: "development", // Enable for development
-    base: "/",
-    scope: "/",
     registerType: "autoUpdate",
     workbox: {
       globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
@@ -26,7 +23,7 @@ export default defineNuxtConfig({
       navigateFallbackDenylist: [/^\/api\//],
     },
     devOptions: {
-      enabled: true, // Enable in dev mode
+      enabled: true,
       suppressWarnings: true,
       navigateFallbackAllowlist: [/^\/$/],
       type: "module",
@@ -45,12 +42,12 @@ export default defineNuxtConfig({
       id: "expense-tracker-pwa",
       icons: [
         {
-          src: "icon-192x192.png",
+          src: "/icon-192x192.png", // Added forward slash
           sizes: "192x192",
           type: "image/png",
         },
         {
-          src: "icon-512x512.png",
+          src: "/icon-512x512.png", // Added forward slash
           sizes: "512x512",
           type: "image/png",
         },
@@ -58,7 +55,6 @@ export default defineNuxtConfig({
       categories: ["finance", "productivity", "utilities"],
     },
   },
-
   runtimeConfig: {
     public: {
       googleSheetId: process.env.GOOGLE_SHEET_ID,
