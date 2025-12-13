@@ -41,47 +41,33 @@ const showInstallPrompt = ref(false)
 let deferredPrompt = null
 
 onMounted(() => {
-  // Only run on client side
-  if (process.client) {
-    // Check if already installed
-    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
-      console.log('App is already installed')
-      return
-    }
+  if (typeof window === 'undefined') return
 
-    // Check if running as PWA
-    if (window.navigator && window.navigator.standalone) {
-      console.log('App is running as PWA on iOS')
-      return
-    }
-
-    // Listen for beforeinstallprompt event
-    window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('beforeinstallprompt event fired')
-      e.preventDefault()
-      deferredPrompt = e
-      
-      // Show custom install prompt after a delay
-      setTimeout(() => {
-        showInstallPrompt.value = true
-      }, 5000) // Increased delay to 5 seconds
-    })
-
-    // Check if service worker is supported
-    if ('serviceWorker' in navigator) {
-      console.log('Service Worker is supported')
-    } else {
-      console.log('Service Worker is not supported')
-    }
-
-    // For debugging - show prompt manually after some time if no event
-    setTimeout(() => {
-      if (!deferredPrompt && !showInstallPrompt.value) {
-        console.log('No install prompt event detected. Browser may not support PWA installation.')
-        // Optionally show a manual install instruction
-      }
-    }, 10000)
+  // Check if already installed
+  if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+    console.log('App is already installed')
+    return
   }
+
+  // Check if running as PWA
+  if (window.navigator && window.navigator.standalone) {
+    console.log('App is running as PWA on iOS')
+    return
+  }
+
+  // Listen for beforeinstallprompt event
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('beforeinstallprompt event fired')
+    e.preventDefault()
+    deferredPrompt = e
+    
+    // Show custom install prompt after a delay
+    setTimeout(() => {
+      showInstallPrompt.value = true
+    }, 3000)
+  })
+
+  console.log('PWA Install component initialized')
 })
 
 function installPWA() {
@@ -89,30 +75,35 @@ function installPWA() {
     deferredPrompt.prompt()
     deferredPrompt.userChoice.then((choiceResult) => {
       console.log('Install choice:', choiceResult.outcome)
-      if (choiceResult.outcome === 'accepted') {
-        console.log('PWA installed successfully')
-      } else {
-        console.log('PWA installation declined')
-      }
       deferredPrompt = null
       showInstallPrompt.value = false
     })
   } else {
-    console.log('No deferred prompt available')
-    // Fallback: show manual installation instructions
-    showManualInstallInstructions()
+    console.log('No install prompt available')
+    showManualInstructions()
   }
 }
 
-function showManualInstallInstructions() {
-  // Show browser-specific instructions
-  alert('To install this app:\n\nChrome/Edge: Click the install icon in the address bar\niOS Safari: Tap Share → Add to Home Screen\nFirefox: Look for "Install" option in the menu')
+function showManualInstructions() {
+  const userAgent = navigator.userAgent.toLowerCase()
+  let instructions = 'To install this app:\n\n'
+  
+  if (userAgent.includes('chrome')) {
+    instructions += 'Chrome: Look for the install icon (⚬) in the address bar'
+  } else if (userAgent.includes('safari')) {
+    instructions += 'Safari: Tap Share → Add to Home Screen'
+  } else if (userAgent.includes('firefox')) {
+    instructions += 'Firefox: Look for "Install" in the page menu'
+  } else {
+    instructions += 'Look for "Install" or "Add to Home Screen" option in your browser menu'
+  }
+  
+  alert(instructions)
 }
 
 function dismissPrompt() {
   showInstallPrompt.value = false
-  // Remember user dismissed it (optional)
-  if (process.client && localStorage) {
+  if (typeof localStorage !== 'undefined') {
     localStorage.setItem('pwa-install-dismissed', Date.now().toString())
   }
 }
