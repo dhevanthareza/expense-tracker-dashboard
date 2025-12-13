@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   // Add the PWA module here!
-  modules: ["shadcn-nuxt", "@pinia/nuxt", "@nuxtjs/pwa"],
+  modules: ["shadcn-nuxt", "@pinia/nuxt", "@vite-pwa/nuxt"],
 
   shadcn: {
     prefix: "",
@@ -23,7 +23,6 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true,
-      periodicSyncForUpdates: 20,
     },
     devOptions: {
       enabled: true,

@@ -10,9 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^3.3.5",
     "@pinia/nuxt": "0.11.3",
     "@tanstack/vue-table": "^8.21.3",
+    "@vite-pwa/nuxt": "^1.1.0",
     "@vueuse/core": "^14.1.0",
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
