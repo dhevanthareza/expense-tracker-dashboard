@@ -17,17 +17,8 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: "autoUpdate",
-    workbox: {
-      globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-      navigateFallback: "/",
-      navigateFallbackDenylist: [/^\/api\//],
-    },
-    devOptions: {
-      enabled: true,
-      suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
-      type: "module",
-    },
+    // Explicitly enable manifest
+    includeManifestIcons: false, // We'll handle icons manually
     manifest: {
       name: "Expense Tracker",
       short_name: "ExpenseApp",
@@ -42,17 +33,30 @@ export default defineNuxtConfig({
       id: "expense-tracker-pwa",
       icons: [
         {
-          src: "/icon-192x192.png", // Added forward slash
+          src: "/icon-192x192.png",
           sizes: "192x192",
           type: "image/png",
+          purpose: "any maskable",
         },
         {
-          src: "/icon-512x512.png", // Added forward slash
+          src: "/icon-512x512.png",
           sizes: "512x512",
           type: "image/png",
+          purpose: "any maskable",
         },
       ],
       categories: ["finance", "productivity", "utilities"],
+    },
+    workbox: {
+      globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+      navigateFallback: "/",
+      navigateFallbackDenylist: [/^\/api\//],
+      cleanupOutdatedCaches: true,
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      type: "module",
     },
   },
   runtimeConfig: {
@@ -80,7 +84,10 @@ export default defineNuxtConfig({
         { name: "apple-mobile-web-app-capable", content: "yes" },
         { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       ],
-      link: [{ rel: "apple-touch-icon", href: "/apple-touch-icon.png" }],
+      link: [
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+        { rel: "manifest", href: "/manifest.webmanifest" },
+      ],
     },
   },
 });
