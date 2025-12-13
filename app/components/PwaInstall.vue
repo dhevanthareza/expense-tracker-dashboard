@@ -41,37 +41,79 @@ const showInstallPrompt = ref(false)
 let deferredPrompt = null
 
 onMounted(() => {
-  // Check if already installed
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    return
-  }
+  // Only run on client side
+  if (process.client) {
+    // Check if already installed
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+      console.log('App is already installed')
+      return
+    }
 
-  // Listen for beforeinstallprompt event
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault()
-    deferredPrompt = e
-    
-    // Show custom install prompt after a delay
+    // Check if running as PWA
+    if (window.navigator && window.navigator.standalone) {
+      console.log('App is running as PWA on iOS')
+      return
+    }
+
+    // Listen for beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('beforeinstallprompt event fired')
+      e.preventDefault()
+      deferredPrompt = e
+      
+      // Show custom install prompt after a delay
+      setTimeout(() => {
+        showInstallPrompt.value = true
+      }, 5000) // Increased delay to 5 seconds
+    })
+
+    // Check if service worker is supported
+    if ('serviceWorker' in navigator) {
+      console.log('Service Worker is supported')
+    } else {
+      console.log('Service Worker is not supported')
+    }
+
+    // For debugging - show prompt manually after some time if no event
     setTimeout(() => {
-      showInstallPrompt.value = true
-    }, 3000)
-  })
+      if (!deferredPrompt && !showInstallPrompt.value) {
+        console.log('No install prompt event detected. Browser may not support PWA installation.')
+        // Optionally show a manual install instruction
+      }
+    }, 10000)
+  }
 })
 
 function installPWA() {
   if (deferredPrompt) {
     deferredPrompt.prompt()
     deferredPrompt.userChoice.then((choiceResult) => {
+      console.log('Install choice:', choiceResult.outcome)
       if (choiceResult.outcome === 'accepted') {
-        console.log('PWA installed')
+        console.log('PWA installed successfully')
+      } else {
+        console.log('PWA installation declined')
       }
       deferredPrompt = null
       showInstallPrompt.value = false
     })
+  } else {
+    console.log('No deferred prompt available')
+    // Fallback: show manual installation instructions
+    showManualInstallInstructions()
   }
+}
+
+function showManualInstallInstructions() {
+  // Show browser-specific instructions
+  alert('To install this app:\n\nChrome/Edge: Click the install icon in the address bar\niOS Safari: Tap Share → Add to Home Screen\nFirefox: Look for "Install" option in the menu')
 }
 
 function dismissPrompt() {
   showInstallPrompt.value = false
+  // Remember user dismissed it (optional)
+  if (process.client && localStorage) {
+    localStorage.setItem('pwa-install-dismissed', Date.now().toString())
+  }
 }
 </script>

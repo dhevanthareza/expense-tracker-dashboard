@@ -1,6 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -8,19 +7,11 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ["shadcn-nuxt", "@pinia/nuxt"],
+  // Add the PWA module here!
+  modules: ["shadcn-nuxt", "@pinia/nuxt", "@nuxtjs/pwa"],
+
   shadcn: {
-    /**
-     * Prefix for all the imported component.
-     * @default "Ui"
-     */
     prefix: "",
-    /**
-     * Directory that the component lives in.
-     * Will respect the Nuxt aliases.
-     * @link https://nuxt.com/docs/api/nuxt-config#alias
-     * @default "@/components/ui"
-     */
     componentDir: "@/components/ui",
   },
 
@@ -53,33 +44,19 @@ export default defineNuxtConfig({
       start_url: "/",
       icons: [
         {
-          src: "/logo-192.png",
+          src: "/icon-192x192.png", // Fix the filename
           sizes: "192x192",
           type: "image/png",
           purpose: "maskable any",
         },
         {
-          src: "/logo-512.png",
+          src: "/icon-512x512.png", // Fix the filename
           sizes: "512x512",
           type: "image/png",
           purpose: "maskable any",
         },
       ],
       categories: ["finance", "productivity", "utilities"],
-      screenshots: [
-        {
-          src: "/screenshot-mobile.png",
-          type: "image/png",
-          sizes: "390x844",
-          form_factor: "narrow",
-        },
-        {
-          src: "/screenshot-desktop.png",
-          type: "image/png",
-          sizes: "1280x720",
-          form_factor: "wide",
-        },
-      ],
     },
     meta: {
       name: "Expense Tracker",
@@ -91,26 +68,19 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Private keys (only available on server-side)
-
-    // Public keys (exposed to client-side)
     public: {
       googleSheetId: process.env.GOOGLE_SHEET_ID,
       googleServiceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY,
       googleApiKey: process.env.GOOGLE_API_KEY,
-      // Add any public env vars here if needed
     },
   },
 
-  // Optimize for production
   nitro: {
     prerender: {
       routes: ["/"],
     },
   },
-
-  css: ["~/assets/css/tailwind.css"],
 
   app: {
     head: {
