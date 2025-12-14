@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  // Add the PWA module here!
   modules: ["shadcn-nuxt", "@pinia/nuxt", "@vite-pwa/nuxt"],
 
   shadcn: {
@@ -17,13 +16,11 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: "autoUpdate",
-    // Explicitly enable manifest
-    includeManifestIcons: false, // We'll handle icons manually
+    includeManifestIcons: false,
     manifest: {
       name: "Expense Tracker",
       short_name: "ExpenseApp",
-      description:
-        "Personal expense tracking application with insights and analytics",
+      description: "Personal expense tracking application with insights and analytics",
       theme_color: "#3B82F6",
       background_color: "#ffffff",
       display: "standalone",
@@ -49,8 +46,41 @@ export default defineNuxtConfig({
     },
     workbox: {
       globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+      // Fix navigation fallback for SPA routing
       navigateFallback: "/",
-      navigateFallbackDenylist: [/^\/api\//],
+      navigateFallbackDenylist: [
+        /^\/api\//,
+        /^\/_nuxt\//,
+        /^\/.*\.(png|jpg|jpeg|svg|ico|css|js)$/
+      ],
+      // Add specific routing rules
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
+            },
+            cacheKeyWillBeUsed: async ({ request }) => {
+              return `${request.url}?${Date.now()}`;
+            },
+          },
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'gstatic-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
+            },
+          },
+        },
+      ],
       cleanupOutdatedCaches: true,
     },
     devOptions: {
@@ -59,6 +89,7 @@ export default defineNuxtConfig({
       type: "module",
     },
   },
+
   runtimeConfig: {
     public: {
       googleSheetId: process.env.GOOGLE_SHEET_ID,
@@ -70,9 +101,12 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ["/"],
+      routes: ["/", "/recap"], // Add all your routes here
     },
   },
+
+  // Ensure proper SPA routing
+  ssr: false, // This might help with PWA routing issues
 
   app: {
     head: {
