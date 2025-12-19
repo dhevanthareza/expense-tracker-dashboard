@@ -1,0 +1,22 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dm20.cashmail",
+      "sha256_cert_fingerprints": [
+        "9D:5D:04:E0:F0:B6:55:6B:60:09:B7:D2:C8:B2:06:AF:18:D3:CE:54:B3:38:47:6E:A8:AE:35:4A:26:13:B4:75"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dm20.cashmail.dev",
+      "sha256_cert_fingerprints": [
+        "63:EE:D5:E0:F3:F0:F3:5B:03:F0:40:3D:1B:74:B6:BA:00:44:32:8D:76:4D:61:8C:F6:31:52:32:5F:DA:E8:A9"
+      ]
+    }
+  }
+]
