@@ -7,15 +7,11 @@
           "8FUCZDKCKL.com.directmail2.cash4mail"
         ],
         "paths": [
-          "/app-link/*",
-          "/app-link-dev/*"
+          "*"
         ],
         "components": [
           {
-            "/": "/app-link/*"
-          },
-          {
-            "/": "/app-link-dev/*"
+            "/": "/*"
           }
         ]
       }
