@@ -62,8 +62,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       googleSheetId: process.env.GOOGLE_SHEET_ID,
-      googleServiceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY,
       googleApiKey: process.env.GOOGLE_API_KEY,
     },
   },
