@@ -9,7 +9,7 @@
       "typeVersion": 2,
       "position": [
         144,
-        32
+        -112
       ],
       "id": "b4f09dc9-7c2e-46cf-bf81-7f474ff9eea8",
       "name": "Code"
@@ -78,8 +78,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        112,
-        416
+        208,
+        672
       ],
       "id": "06812b93-922f-4c57-8c24-ef4f1e39984e",
       "name": "Tanya",
@@ -168,7 +168,7 @@
       "typeVersion": 1,
       "position": [
         -256,
-        672
+        1040
       ],
       "id": "c5b2c760-71ae-47e9-b2cd-946bc98eb19e",
       "name": "Google Gemini Chat Model",
@@ -199,7 +199,7 @@
       "typeVersion": 4.7,
       "position": [
         432,
-        32
+        -112
       ],
       "id": "d8cbff42-ac54-4d82-8183-654bff4bbafe",
       "name": "Get row(s) in sheet",
@@ -341,8 +341,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        1584,
-        48
+        2496,
+        -96
       ],
       "id": "4e5c4aab-ca7c-4167-9510-9fd5c8eb99ed",
       "name": "Google Sheets",
@@ -369,8 +369,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        912,
-        -144
+        1280,
+        -320
       ],
       "id": "2c3c8b03-e40d-4fde-b577-cffc3b3a5fc9",
       "name": "Create sheet",
@@ -411,7 +411,7 @@
       "typeVersion": 2.2,
       "position": [
         640,
-        32
+        -112
       ],
       "id": "73d473d4-4ddc-4b1f-b3c4-dc0b7cd8bd44",
       "name": "If1"
@@ -457,8 +457,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1264,
-        -144
+        1888,
+        -320
       ],
       "id": "8b8aee85-f795-4df4-b87a-5b62af611300",
       "name": "Append row in sheet",
@@ -534,8 +534,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1088,
-        -144
+        1616,
+        -320
       ],
       "id": "ed2bfa4f-1976-4c94-b8c7-eee14a68d3db",
       "name": "Edit Fields1"
@@ -547,8 +547,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1440,
-        -144
+        2096,
+        -320
       ],
       "id": "465d9401-9fc1-44bd-af45-a343169f9266",
       "name": "Parser"
@@ -560,8 +560,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        880,
-        48
+        1680,
+        -96
       ],
       "id": "fc614a5a-de93-4ee1-ad12-b588536f7ac4",
       "name": "Parser1"
@@ -586,7 +586,7 @@
       "typeVersion": 4.7,
       "position": [
         304,
-        640
+        1008
       ],
       "id": "45207171-1a07-45ab-afd8-cb80d7644510",
       "name": "Baca barang kuartal kemarin",
@@ -619,7 +619,7 @@
       "typeVersion": 4.6,
       "position": [
         512,
-        528
+        896
       ],
       "id": "254bab0c-860a-44b8-8834-8cb31d0989b6",
       "name": "Baca barang kuartal ini",
@@ -639,7 +639,7 @@
       "typeVersion": 1,
       "position": [
         -416,
-        640
+        1008
       ],
       "id": "5a27f787-b774-484a-bc0b-e514b066a5b3",
       "name": "OpenRouter Chat Model",
