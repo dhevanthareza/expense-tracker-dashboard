@@ -1,0 +1,39 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "8FUCZDKCKL.com.directmail2.cash4mail"
+        ],
+        "paths": [
+          "/app-link/*"
+        ],
+        "components": [
+          {
+            "/": "/app-link/*"
+          }
+        ]
+      },
+      {
+        "appIDs": [
+          "8FUCZDKCKL.com.directmail2.cash4mail.dev"
+        ],
+        "paths": [
+          "/app-link-dev/*"
+        ],
+        "components": [
+          {
+            "/": "/app-link-dev/*"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "8FUCZDKCKL.com.directmail2.cash4mail",
+      "8FUCZDKCKL.com.directmail2.cash4mail.dev"
+    ]
+  }
+}
