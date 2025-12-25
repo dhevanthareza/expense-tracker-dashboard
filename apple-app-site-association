@@ -7,22 +7,13 @@
           "8FUCZDKCKL.com.directmail2.cash4mail"
         ],
         "paths": [
-          "/app-link/*"
+          "/app-link/*",
+          "/app-link-dev/*"
         ],
         "components": [
           {
             "/": "/app-link/*"
-          }
-        ]
-      },
-      {
-        "appIDs": [
-          "8FUCZDKCKL.com.directmail2.cash4mail.dev"
-        ],
-        "paths": [
-          "/app-link-dev/*"
-        ],
-        "components": [
+          },
           {
             "/": "/app-link-dev/*"
           }
@@ -32,8 +23,7 @@
   },
   "webcredentials": {
     "apps": [
-      "8FUCZDKCKL.com.directmail2.cash4mail",
-      "8FUCZDKCKL.com.directmail2.cash4mail.dev"
+      "8FUCZDKCKL.com.directmail2.cash4mail"
     ]
   }
 }
